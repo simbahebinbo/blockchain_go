@@ -1,2 +1,4 @@
 *.db
 *.dat
+.idea/
+blockchain_go
