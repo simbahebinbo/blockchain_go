@@ -2,7 +2,7 @@ package main
 
 func main() {
 	bc := NewBlockchain()
-	defer bc.db.Close()
+	defer bc.Close()
 
 	cli := CLI{bc}
 	cli.Run()
