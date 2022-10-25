@@ -154,6 +154,10 @@ func (bc *Blockchain) Iterator() *BlockchainIterator {
 	return bci
 }
 
+func (bc *Blockchain) Close() {
+	bc.db.Close()
+}
+
 // Next returns next block starting from the tip
 func (i *BlockchainIterator) Next() *Block {
 	var block *Block

@@ -13,13 +13,13 @@ type CLI struct{}
 
 func (cli *CLI) createBlockchain(address string) {
 	bc := CreateBlockchain(address)
-	bc.db.Close()
+	bc.Close()
 	fmt.Println("Done!")
 }
 
 func (cli *CLI) getBalance(address string) {
 	bc := NewBlockchain(address)
-	defer bc.db.Close()
+	defer bc.Close()
 
 	balance := 0
 	UTXOs := bc.FindUTXO(address)
@@ -49,7 +49,7 @@ func (cli *CLI) validateArgs() {
 func (cli *CLI) printChain() {
 	// TODO: Fix this
 	bc := NewBlockchain("")
-	defer bc.db.Close()
+	defer bc.Close()
 
 	bci := bc.Iterator()
 
@@ -70,7 +70,7 @@ func (cli *CLI) printChain() {
 
 func (cli *CLI) send(from, to string, amount int) {
 	bc := NewBlockchain(from)
-	defer bc.db.Close()
+	defer bc.Close()
 
 	tx := NewUTXOTransaction(from, to, amount, bc)
 	bc.MineBlock([]*Transaction{tx})
